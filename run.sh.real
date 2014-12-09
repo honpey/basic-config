@@ -1,0 +1,10 @@
+KERNEL_PATH=arch/arm/boot/zImage
+/usr/local/bin/qemu-system-arm -kernel $KERNEL_PATH \
+		-dtb vpa15.dtb \
+		-M vexpress-a15 \
+		-m 3072 \
+		-drive file=rootfs.ext2,if=none,id=id_root -device virtio-blk-device,drive=id_root -fsdev local,id=id_9p,path=fsdir,security_model=none\
+		-nographic \
+		--append "root=/dev/vda console=ttyAMA0" 
+	#	-S -gdb tcp::7852
+
